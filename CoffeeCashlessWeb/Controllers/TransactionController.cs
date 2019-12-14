@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BLL;
+using DTO;
+using CoffeeCashlessWeb.ViewModels;
 
 namespace CoffeeCashlessWeb.Controllers
 {
@@ -11,9 +14,11 @@ namespace CoffeeCashlessWeb.Controllers
         // GET: Transaction
         public ActionResult Index()
         {
-
-            List<DTO.Transaction> transactions = BLL.TransactionManager.GetAllTransactions();
-            return View(transactions);
+            TransactionVM tvm = new TransactionVM
+            {
+                Name = ProductManager
+            };
+          
         }
 
         // GET: Transaction/Details/2,2019
