@@ -17,7 +17,7 @@ namespace DAL
         {
             List<Product> results = null;
        
-            string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["CashlessCoffee_DB"].ConnectionString;
+            string connectionString = ConfigurationManager.ConnectionStrings["CashlessCoffee_DB"].ConnectionString;
 
             try
             {

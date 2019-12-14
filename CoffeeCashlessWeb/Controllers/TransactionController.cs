@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,7 @@ namespace CoffeeCashlessWeb.Controllers
         // GET: Transaction
         public ActionResult Index()
         {
-            List<DTO.Transaction> transactions = BLL.TransactionManager.GetAllTransactions();
+            List<Transaction> transactions = BLL.TransactionManager.GetAllTransactions();
 
             
             return View(transactions);
