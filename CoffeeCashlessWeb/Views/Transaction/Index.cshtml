@@ -1,5 +1,4 @@
-﻿@using DTO;
-@model IEnumerable<Transaction>
+﻿@model IEnumerable<CoffeeCashlessWeb.ViewModels.TransactionSimpleViewModel>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -7,13 +6,10 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Date)
+            @Html.DisplayNameFor(model => model.IdAccount)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.AccountFK)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProductFK)
+            @Html.DisplayNameFor(model => model.IdProduct)
         </th>
         <th></th>
     </tr>
@@ -21,18 +17,18 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Date)
+            @Html.DisplayFor(modelItem => item.IdAccount)
         </td>
+     
         <td>
-            @Html.DisplayFor(modelItem => item.AccountFK)
+            @Html.DisplayFor(modelItem => item.IdProduct)
         </td>
+
+
         <td>
-            @Html.DisplayFor(modelItem => item.ProductFK)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
         </td>
     </tr>
 }

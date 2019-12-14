@@ -3,57 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using CoffeeCashlessWeb.ViewModels;
-using DTO;
 
 namespace CoffeeCashlessWeb.Controllers
 {
-    public class TransactionController : Controller
+    public class ConsoleController : Controller
     {
-        // GET: Transaction
+        // GET: Console
         public ActionResult Index()
         {
-            List<Transaction> transactions = BLL.TransactionManager.GetAllTransactions();
-            return View(Convert(transactions));
+            return View();
         }
 
-        private List<TransactionSimpleViewModel> Convert(List<Transaction> transactions)
-        {
-            List<TransactionSimpleViewModel> vmList = new List<TransactionSimpleViewModel>(); 
-            foreach (Transaction t in transactions)
-            {
-                TransactionSimpleViewModel vm = new TransactionSimpleViewModel(t.Date, t.AccountFK, t.ProductFK);
-                vmList.Add(vm);
-            }
-            return vmList;
-        }
-
-        /*
-        // GET: Transaction/Details/2,2019
-        public ActionResult Details(int month, int year)
-        {
-            List<DTO.Transaction> transactions = BLL.TransactionManager.GetTransactionsByMonth(month, year);
-            return View(transactions);
-        }
-        */
-
-
-        // GET: Transaction/Details/5
+        // GET: Console/Details/5
         public ActionResult Details(int id)
         {
-            DTO.Transaction transaction = BLL.TransactionManager.GetTransactionById(id);
-            return View(transaction);
+            return View();
         }
-        
 
-
-        // GET: Transaction/Create
+        // GET: Console/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Transaction/Create
+        // POST: Console/Create
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
@@ -69,13 +42,13 @@ namespace CoffeeCashlessWeb.Controllers
             }
         }
 
-        // GET: Transaction/Edit/5
+        // GET: Console/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Transaction/Edit/5
+        // POST: Console/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -91,13 +64,13 @@ namespace CoffeeCashlessWeb.Controllers
             }
         }
 
-        // GET: Transaction/Delete/5
+        // GET: Console/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Transaction/Delete/5
+        // POST: Console/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
