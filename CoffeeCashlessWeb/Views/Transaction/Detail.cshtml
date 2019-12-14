@@ -1,0 +1,36 @@
+﻿@model DTO.Transaction
+
+<div>
+    <h4>Transaction</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AccountFK)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AccountFK)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductFK)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductFK)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

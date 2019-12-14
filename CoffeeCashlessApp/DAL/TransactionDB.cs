@@ -39,6 +39,9 @@ namespace DAL
 
                             transaction.Date = (DateTime)dr["Date"];
 
+                            transaction.ProductFK = (int)dr["ProductFK"];
+                            transaction.ProductFK = (int)dr["ProductFK"];
+
                             results.Add(transaction);
 
                         }
