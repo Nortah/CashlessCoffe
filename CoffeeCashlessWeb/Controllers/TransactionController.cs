@@ -11,17 +11,21 @@ namespace CoffeeCashlessWeb.Controllers
         // GET: Transaction
         public ActionResult Index()
         {
-
             List<DTO.Transaction> transactions = BLL.TransactionManager.GetAllTransactions();
+
+            
             return View(transactions);
         }
 
+        /*
         // GET: Transaction/Details/2,2019
         public ActionResult Details(int month, int year)
         {
             List<DTO.Transaction> transactions = BLL.TransactionManager.GetTransactionsByMonth(month, year);
             return View(transactions);
         }
+        */
+
 
         // GET: Transaction/Details/5
         public ActionResult Details(int id)
@@ -29,6 +33,7 @@ namespace CoffeeCashlessWeb.Controllers
             DTO.Transaction transaction = BLL.TransactionManager.GetTransactionById(id);
             return View(transaction);
         }
+        
 
 
         // GET: Transaction/Create
