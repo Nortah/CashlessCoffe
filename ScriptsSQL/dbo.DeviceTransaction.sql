@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[Transaction]
+﻿CREATE TABLE [dbo].[DeviceTransaction]
 (
 	[Id] INT NOT NULL PRIMARY KEY, 
     [Date] DATETIME NOT NULL, 
