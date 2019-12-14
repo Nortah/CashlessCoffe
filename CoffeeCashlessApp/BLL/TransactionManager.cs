@@ -24,6 +24,11 @@ namespace BLL
             return TransactionDB.GetTransactionsByMonth(month, year);
         }
 
+        public static Transaction GetTransactionById(int id)
+        {
+            return TransactionDB.GetTransactionsById(id);
+        }
+
         public static void DisplayTransactions(List<Transaction> transactions)
         {
             foreach(Transaction t in transactions)
