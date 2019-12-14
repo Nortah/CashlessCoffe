@@ -100,7 +100,7 @@ namespace DAL
         }
         public static Transaction GetTransactionsById(int id) //select a specific transaction
         {
-            List<Transaction> results = null;
+            Transaction result = null;
 
 
             string connectionString = ConfigurationManager.ConnectionStrings["CashlessCoffee_DB"].ConnectionString;
@@ -117,10 +117,10 @@ namespace DAL
 
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {
-                        while (dr.Read())
+                        if (dr.Read())
                         {
-                            if (results == null)
-                                results = new List<Transaction>();
+                            if (result == null)
+                                result = new Transaction();
 
                             Transaction transaction = new Transaction();
 
@@ -132,8 +132,6 @@ namespace DAL
 
                             transaction.ProductFK = (int)dr["ProductFK"];
 
-                            results.Add(transaction);
-
                         }
                     }
                 }
@@ -142,7 +140,7 @@ namespace DAL
             {
                 throw e;
             }
-            return results;
+            return result;
         }
         public static int AddTransaction(Transaction transaction)
         {
