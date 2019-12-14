@@ -124,5 +124,44 @@ namespace DAL
             }
             return product;
         }
+        public static Product GetProdcutByName(string name)
+        {
+
+            Product product = new Product(); ;
+
+            string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["CashlessCoffee_DB"].ConnectionString;
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "Select * from Product Where Name = @name";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@name", name);
+
+                    cn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.Read())
+                        {
+
+                            product.Id = (int)dr["Id"];
+
+                            product.Name = (string)dr["Name"];
+
+                            product.Price = (double)dr["Price"];
+
+
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return product;
+        }
     }
 }
