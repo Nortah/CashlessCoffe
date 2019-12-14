@@ -14,5 +14,15 @@ namespace BLL
         {
             return ProductDB.GetProdcutById(id);
         }
+        public static List<string> GetAllProductName()
+        {
+            List <Product> products = ProductDB.GetAllProducts();
+            List<string> productsName = new List<string>();
+            foreach(Product p in products)
+            {
+                productsName.Add(p.Name);
+            }
+            return productsName;
+        }
     }
 }
