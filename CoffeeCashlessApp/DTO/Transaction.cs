@@ -8,10 +8,8 @@ namespace DTO
     {
         public int Id { get; set; }
         public DateTime Date { get; set; }
-        [ForeignKey("AccountFK")]
         public Account Account { get; set; }
         public int AccountFK { get; set; }
-        [ForeignKey("ProductFK")]
         public Product Product { get; set; }
         public int ProductFK { get; set; }
 
