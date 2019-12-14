@@ -14,35 +14,57 @@ namespace CoffeeCashlessWeb.Controllers
         public ActionResult Index()
         {
             List<Transaction> transactions = BLL.TransactionManager.GetAllTransactions();
-            return View(Convert(transactions));
+            return View(ConvertList(transactions));
         }
 
-        private List<TransactionSimpleViewModel> Convert(List<Transaction> transactions)
+        private List<TransactionSimpleViewModel> ConvertList(List<Transaction> transactions)
         {
-            List<TransactionSimpleViewModel> vmList = new List<TransactionSimpleViewModel>(); 
-            foreach (Transaction t in transactions)
+            try
             {
-                TransactionSimpleViewModel vm = new TransactionSimpleViewModel(t.Date, t.AccountFK, t.ProductFK);
-                vmList.Add(vm);
+                List<TransactionSimpleViewModel> vmList = new List<TransactionSimpleViewModel>();
+                foreach (Transaction t in transactions)
+                {
+                    TransactionSimpleViewModel vm = new TransactionSimpleViewModel(t.Date, t.Id, t.AccountFK, t.ProductFK);
+                    vmList.Add(vm);
+                }
+                return vmList;
             }
-            return vmList;
+            catch
+            {
+                return null;
+            }
         }
 
-        /*
-        // GET: Transaction/Details/2,2019
-        public ActionResult Details(int month, int year)
+        private TransactionSimpleViewModel ConvertObject(Transaction t)
         {
-            List<DTO.Transaction> transactions = BLL.TransactionManager.GetTransactionsByMonth(month, year);
-            return View(transactions);
+            return (new TransactionSimpleViewModel(t.Date, t.Id, t.AccountFK, t.ProductFK));
+  
         }
-        */
+
+
+        // GET: Transaction/Details/2019
+        [HttpPost]
+        public ActionResult Index(int month, int year)
+        { 
+            List<Transaction> transactions = BLL.TransactionManager.GetTransactionsByMonth(month, year);
+            List <TransactionSimpleViewModel> t = ConvertList(transactions);
+            if (t != null)
+                return View(t);
+            else
+            {
+                List<TransactionSimpleViewModel> t2 = new List<TransactionSimpleViewModel>();
+                t2.Add(new TransactionSimpleViewModel(new DateTime(1999,01,01), 1, 1, 1));
+                return View(t2);
+            }
+                
+        }
 
 
         // GET: Transaction/Details/5
         public ActionResult Details(int id)
         {
-            DTO.Transaction transaction = BLL.TransactionManager.GetTransactionById(id);
-            return View(transaction);
+            Transaction transaction = BLL.TransactionManager.GetTransactionById(id);
+            return View(ConvertObject(transaction));
         }
         
 

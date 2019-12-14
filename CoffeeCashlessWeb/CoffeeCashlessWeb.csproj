@@ -182,8 +182,9 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\BuyCoffee\Index.cshtml" />
-    <Content Include="Views\Transaction\Detail.cshtml" />
     <Content Include="Views\Transaction\Index.cshtml" />
+    <Content Include="Views\Transaction\Calendar.cshtml" />
+    <Content Include="Views\Transaction\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CoffeeCashlessApp\CoffeeCashlessApp.csproj">

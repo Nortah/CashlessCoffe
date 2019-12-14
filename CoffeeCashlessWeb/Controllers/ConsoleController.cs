@@ -11,6 +11,9 @@ namespace CoffeeCashlessWeb.Controllers
         // GET: Console
         public ActionResult Index()
         {
+            // CREATE LIST
+            // DAL
+
             return View();
         }
 

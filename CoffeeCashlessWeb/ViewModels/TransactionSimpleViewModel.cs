@@ -13,10 +13,15 @@ namespace CoffeeCashlessWeb.ViewModels
         //Product
         public int IdProduct { get; set; }
 
+        //Product
+        public int Id { get; set; }
+
+
         public DateTime Date { get; set; }
 
-        public TransactionSimpleViewModel(DateTime date, int idAccount, int idProduct)
+        public TransactionSimpleViewModel(DateTime date, int id, int idAccount, int idProduct)
         {
+            Id = id;
             Date = date;
             IdAccount = idAccount;
             IdProduct = idProduct;
