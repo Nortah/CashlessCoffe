@@ -26,7 +26,7 @@ namespace CoffeeCashlessWeb.Controllers
         // GET: Transaction/Details/5
         public ActionResult Details(int id)
         {
-            DTO.Transaction transaction = null; // = DAL.TransactionDB.GetTransactionsByMonth(month, year);
+            DTO.Transaction transaction = BLL.TransactionManager.GetTransactionById(id);
             return View(transaction);
         }
 
