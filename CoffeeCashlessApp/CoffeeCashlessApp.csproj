@@ -85,6 +85,7 @@
     <Content Include="ScriptsSQL\dbo.Account.sql" />
     <Content Include="ScriptsSQL\dbo.Product.sql" />
     <Content Include="ScriptsSQL\dbo.Transaction.sql" />
+    <Content Include="ScriptsSQL\Inserts.sql" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
