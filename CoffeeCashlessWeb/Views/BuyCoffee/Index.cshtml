@@ -1,4 +1,4 @@
-﻿@model CoffeeCashlessWeb.Models.AccountM
+﻿@model CoffeeCashlessWeb.ViewModels.TransactionVM
 
 @{
     ViewBag.Title = "Index";
@@ -15,19 +15,15 @@
             <div class="col-md-4">
                 <label for="NProduct">Choose product</label>
                 <select name="Name" id="Name" class="form-control">
-                    @foreach (var name in Model.Locations)
+                    @foreach (var name in Model.Name)
                     {
                         <option value="@name">@name</option>
                     }
                 </select>
             </div>
-            <div class="col-md-4">
-                <label for="Checkin">Check-In</label>
-                <input type="date" id="Checkin" name="Checkin" class="form-control" min="@Model.Checkin.Date.ToString("yyyy-MM-dd")" value="@Model.Checkin.Date.ToString("yyyy-MM-dd")" />
-            </div>
-            <div class="col-md-4">
-                <label for="Checkout">Check-Out</label>
-                <input type="date" id="Checkout" name="Checkout" class="form-control" min="@Model.Checkout.Date.ToString("yyyy-MM-dd")" value="@Model.Checkout.Date.ToString("yyyy-MM-dd")" />
+            <div class="col-md-6">
+                <label for="idAccount">Id Student</label>
+                <input type="text" id="idAccount" name="idAccount" class="form-control" />
             </div>
         </div>
         <div class="row"><br /></div>
