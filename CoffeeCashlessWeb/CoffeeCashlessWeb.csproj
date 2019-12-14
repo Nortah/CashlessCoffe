@@ -137,6 +137,7 @@
     <Compile Include="Models\ProductM.cs" />
     <Compile Include="Models\TransactionM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\TransactionSimpleViewModel.cs" />
     <Compile Include="ViewModels\TransactionVM.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using CoffeeCashlessWeb.ViewModels;
+using DTO;
 
 namespace CoffeeCashlessWeb.Controllers
 {
@@ -11,10 +13,19 @@ namespace CoffeeCashlessWeb.Controllers
         // GET: Transaction
         public ActionResult Index()
         {
-            List<DTO.Transaction> transactions = BLL.TransactionManager.GetAllTransactions();
+            List<Transaction> transactions = BLL.TransactionManager.GetAllTransactions();
+            return View(Convert(transactions));
+        }
 
-            
-            return View(transactions);
+        private List<TransactionSimpleViewModel> Convert(List<Transaction> transactions)
+        {
+            List<TransactionSimpleViewModel> vmList = new List<TransactionSimpleViewModel>(); 
+            foreach (Transaction t in transactions)
+            {
+                TransactionSimpleViewModel vm = new TransactionSimpleViewModel(t.Date, t.AccountFK, t.ProductFK);
+                vmList.Add(vm);
+            }
+            return vmList;
         }
 
         /*

@@ -14,7 +14,7 @@ namespace BLL
         {
             return TransactionDB.AddTransaction(transaction);
         }
-        public static List<Transaction> GetAllTransactions()
+        public static List<DTO.Transaction> GetAllTransactions()
         {
             return TransactionDB.GetAllTransactions();
         }
