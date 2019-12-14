@@ -98,6 +98,50 @@ namespace DAL
             }
             return results;
         }
+        public static Transaction GetTransactionsById(int id) //select a specific transaction
+        {
+            Transaction result = null;
+
+
+            string connectionString = ConfigurationManager.ConnectionStrings["CashlessCoffee_DB"].ConnectionString;
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "Select * from DeviceTransaction Where Id = @Id";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@Id", id);
+
+                    cn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.Read())
+                        {
+                            if (result == null)
+                                result = new Transaction();
+
+                            Transaction transaction = new Transaction();
+
+                            transaction.Id = (int)dr["Id"];
+
+                            transaction.Date = (DateTime)dr["Date"];
+
+                            transaction.AccountFK = (int)dr["AccountFK"];
+
+                            transaction.ProductFK = (int)dr["ProductFK"];
+
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return result;
+        }
         public static int AddTransaction(Transaction transaction)
         {
             {

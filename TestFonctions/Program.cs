@@ -13,7 +13,7 @@ namespace TestFonctions
         public static void Main(string[] args)
         {
             Transaction transaction = new Transaction();
-            transaction.Id = 0;
+            transaction.Id = 10;
             transaction.Date = Convert.ToDateTime("10/01/2020");
             transaction.AccountFK = 0;
             transaction.ProductFK = 2;
