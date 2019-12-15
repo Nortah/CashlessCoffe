@@ -29,5 +29,10 @@ namespace BLL
             Product product = ProductDB.GetProdcutByName(name);
             return product.Id;
         }
+
+        public static List<string> GetAllNamesProduct()
+        {
+            return ProductDB.GetAllNamesProduct();
+        }
     }
 }

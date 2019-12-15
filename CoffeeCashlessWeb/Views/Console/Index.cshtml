@@ -1,10 +1,8 @@
 ﻿@model CoffeeCashlessWeb.ViewModels.TransactionVM
-
 @{
     ViewBag.Title = "Index";
 
 }
-
 <h2>Buy a coffee</h2>
 <br />
 @using (Html.BeginForm("Index", "Console", FormMethod.Post))
@@ -15,7 +13,7 @@
             <div class="col-md-4">
                 <label for="NProduct">Choose product</label>
                 <select name="Name" id="Name" class="form-control">
-                    @foreach (var name in Model.Name)
+                    @foreach (var name in Model.Names)
                     {
                         <option value="@name">@name</option>
                     }
@@ -36,22 +34,3 @@
     </form>
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

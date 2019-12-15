@@ -41,7 +41,7 @@ namespace DAL
 
                             product.Name = (string)dr["Name"];
 
-                            product.Price = (float)dr["Price"];
+                            product.Price = (decimal)dr["Price"];
 
                             results.Add(product);
 
@@ -111,7 +111,7 @@ namespace DAL
 
                             product.Name = (string)dr["Name"];
 
-                            product.Price = (double)dr["Price"];
+                            product.Price = (decimal)dr["Price"];
                             
 
                         }
@@ -150,7 +150,7 @@ namespace DAL
 
                             product.Name = (string)dr["Name"];
 
-                            product.Price = (double)dr["Price"];
+                            product.Price = (decimal)dr["Price"];
 
 
                         }
@@ -163,5 +163,48 @@ namespace DAL
             }
             return product;
         }
+
+        //retourne le nom des boissons
+        public static List<string> GetAllNamesProduct()
+        {
+            string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["CashlessCoffee_DB"].ConnectionString;
+            List<string> names = null;
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "SELECT DISTINCT(Name) FROM Product";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cn.Open();
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            if (names == null)
+                                names = new List<string>();
+
+
+                            string name = (string)dr["Name"];
+                            names.Add(name);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return names;
+        }
+
+
+
+
+
+
+
+
+
+
     }
 }
