@@ -14,6 +14,10 @@ namespace BLL
         {
             return ProductDB.GetProdcutById(id);
         }
+        public static decimal GetPriceById(int id)
+        {
+            return ProductDB.GetPriceById(id);
+        }
         public static List<string> GetAllProductName()
         {
             List <Product> products = ProductDB.GetAllProducts();

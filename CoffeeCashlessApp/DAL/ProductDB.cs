@@ -85,7 +85,43 @@ namespace DAL
                 return result;
             }
         }
-        public static Product GetProdcutById(int id)
+        public static decimal GetPriceById(int id)
+        {
+
+            Product product = new Product(); ;
+
+            string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["CashlessCoffee_DB"].ConnectionString;
+
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(connectionString))
+                {
+                    string query = "Select Price from Product Where Id = @Id";
+                    SqlCommand cmd = new SqlCommand(query, cn);
+                    cmd.Parameters.AddWithValue("@Id", id);
+
+                    cn.Open();
+
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        if (dr.Read())
+                        {
+
+                            product.Price = (decimal)dr["Price"];
+                            
+
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return product.Price;
+        }
+
+         public static Product GetProdcutById(int id)
         {
 
             Product product = new Product(); ;
@@ -124,6 +160,8 @@ namespace DAL
             }
             return product;
         }
+
+
         public static Product GetProdcutByName(string name)
         {
 

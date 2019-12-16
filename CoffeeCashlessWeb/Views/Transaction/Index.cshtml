@@ -17,7 +17,7 @@
             @Html.DisplayNameFor(model => model.IdAccount)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.IdProduct)
+            @Html.DisplayNameFor(model => model.Price)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Date)
@@ -32,7 +32,7 @@
                 @Html.DisplayFor(modelItem => item.IdAccount)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdProduct)
+                @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Date)
@@ -41,7 +41,15 @@
                 @Html.ActionLink("Details", "Details", new { id = item.Id }) |
             </td>
         </tr>
+
     }
 
-
 </table>
+
+
+@{ decimal total = 0;}
+@foreach (var item in Model)
+{
+    total += item.Price;
+}
+<h2>Total Amount : @total .-</h2>

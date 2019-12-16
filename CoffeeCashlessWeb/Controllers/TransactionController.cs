@@ -24,7 +24,7 @@ namespace CoffeeCashlessWeb.Controllers
                 List<TransactionSimpleViewModel> vmList = new List<TransactionSimpleViewModel>();
                 foreach (Transaction t in transactions)
                 {
-                    TransactionSimpleViewModel vm = new TransactionSimpleViewModel(t.Date, t.Id, t.AccountFK, t.ProductFK);
+                    TransactionSimpleViewModel vm = new TransactionSimpleViewModel(t.Date, t.Id, t.AccountFK, t.ProductFK, BLL.ProductManager.GetPriceById(t.ProductFK));
                     vmList.Add(vm);
                 }
                 return vmList;
@@ -37,7 +37,7 @@ namespace CoffeeCashlessWeb.Controllers
 
         private TransactionSimpleViewModel ConvertObject(Transaction t)
         {
-            return (new TransactionSimpleViewModel(t.Date, t.Id, t.AccountFK, t.ProductFK));
+            return (new TransactionSimpleViewModel(t.Date, t.Id, t.AccountFK, t.ProductFK, BLL.ProductManager.GetPriceById(t.ProductFK)));
   
         }
 
@@ -53,7 +53,7 @@ namespace CoffeeCashlessWeb.Controllers
             else
             {
                 List<TransactionSimpleViewModel> t2 = new List<TransactionSimpleViewModel>();
-                t2.Add(new TransactionSimpleViewModel(new DateTime(1999,01,01), 1, 1, 1));
+                t2.Add(new TransactionSimpleViewModel(new DateTime(1999,01,01), 1, 1, 1, 1));
                 return View(t2);
             }
                 
