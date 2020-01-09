@@ -1,55 +1,172 @@
 ﻿@model IEnumerable<CoffeeCashlessWeb.ViewModels.TransactionSimpleViewModel>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<form method="post">
+<head>
+    <script>
+        $(document).ready(function () {
+            $('#RefreshPage').click(function () {
+                window.location.reload();
+            });
+        });
+    </script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
-    <input type="text" name="year" id="year" value="2019" />
-    <input type="text" name="month" id="month" value="12" />
-    <input type="submit" name="sub" value="send" />
 
-</form>
-<table class="table">
-
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.IdAccount)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Date)
-        </th>
-        <th></th>
-    </tr>
-
+    @{ decimal total = 0;}
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdAccount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-            </td>
-        </tr>
-
+        total += item.Price;
     }
+
+
+
+    <script type="text/javascript">
+
+            window.onload = function () {
+                var chart = new CanvasJS.Chart("chartContainer", {
+                    title: {
+                        text: "Total Amount"
+                    },
+                    data: [
+                        {
+
+                            type: "column",
+                            dataPoints: [
+                                { label: "Total in CHF", y: @total },
+
+                            ]
+                        }
+                    ]
+                });
+                chart.render();
+            }
+    </script>
+    <style>
+
+
+        #refresh {
+            margin-top: 20px;
+            display: block;
+            width: 70%;
+            margin-left: 15%;
+            margin-right: 15%;
+        }
+
+        /*table*/
+        table.transaction {
+            text-align: center;
+            table-layout: fixed;
+            display: block;
+            margin-top: 20px;
+            height: 200px;
+            width: 80%;
+            margin-left: 10%;
+            margin-right: 10%;
+            overflow-y: scroll;
+            border-collapse: collapse;
+            background: none;
+        }
+
+            table.transaction td, table.transaction th {
+                border: 1px solid #AAAAAA;
+                padding: 3px 2px;
+                width: 200px;
+            }
+
+            table.transaction tbody td {
+                font-size: 13px;
+            }
+
+            table.transaction tr:nth-child(even) {
+                background: #D0E4F5;
+            }
+
+            table.transaction thead {
+                background: #1F7BB8;
+                background: -moz-linear-gradient(top, #579cca 0%, #3588bf 66%, #1F7BB8 100%);
+                background: -webkit-linear-gradient(top, #579cca 0%, #3588bf 66%, #1F7BB8 100%);
+                background: linear-gradient(to bottom, #579cca 0%, #3588bf 66%, #1F7BB8 100%);
+                border-bottom: 2px solid #444444;
+            }
+
+                table.transaction thead th {
+                    font-size: 16px;
+                    font-weight: bold;
+                    color: #FFFFFF;
+                    text-align: center;
+                    border-left: 2px solid #D0E4F5;
+                }
+
+                    table.transaction thead th:first-child {
+                        border-left: none;
+                    }
+
+
+            table.transaction td {
+                font-size: 14px;
+            }
+
+
+        /*
+                total
+            */
+
+        #chartContainer {
+            height: 300px;
+            width: 100%;
+        }
+    </style>
+</head>
+
+
+<div id="refresh">
+    <form method="post">
+
+        <input type="text" name="year" id="year" value="2019" />
+        <input type="text" name="month" id="month" value="12" />
+        <input type="submit" name="sub" class="btn btn-primary" value="send" />
+        <input type="submit" id="RefreshPage" class="btn btn-primary" value="Refresh" name="Command" />
+
+    </form>
+</div>
+
+<table class="transaction">
+
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdAccount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdProduct)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                Détails
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdAccount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdProduct)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+            </tr>
+        }
+    </tbody>
 
 </table>
 
-
-@{ decimal total = 0;}
-@foreach (var item in Model)
-{
-    total += item.Price;
-}
-<h2>Total Amount : @total .-</h2>
+<div id="chartContainer"></div>

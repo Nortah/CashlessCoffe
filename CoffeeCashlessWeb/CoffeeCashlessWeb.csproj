@@ -186,6 +186,7 @@
     <Content Include="Views\Transaction\Calendar.cshtml" />
     <Content Include="Views\Transaction\Details.cshtml" />
     <Content Include="Views\Console\Index.cshtml" />
+    <Content Include="Views\Transaction\Monitoring.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CoffeeCashlessApp\CoffeeCashlessApp.csproj">
