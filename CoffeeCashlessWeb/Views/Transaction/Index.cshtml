@@ -41,78 +41,92 @@
             }
     </script>
     <style>
-
-
-        #refresh {
+        #refresh
+        {
             margin-top: 20px;
             display: block;
-            width: 70%;
+            width: 80%;
             margin-left: 15%;
             margin-right: 15%;
+            text-align : center;
         }
 
         /*table*/
-        table.transaction {
+        table.transaction
+        {
             text-align: center;
             table-layout: fixed;
             display: block;
-            margin-top: 20px;
-            height: 200px;
-            width: 80%;
-            margin-left: 10%;
-            margin-right: 10%;
+            margin-top: 50px;
+            height: 100%;
+            width: 60%;
+            margin-left: 25%;
+            margin-right: 15%;
             overflow-y: scroll;
             border-collapse: collapse;
             background: none;
+            margin-bottom : 50px;
         }
 
-            table.transaction td, table.transaction th {
-                border: 1px solid #AAAAAA;
-                padding: 3px 2px;
-                width: 200px;
-            }
+        table.transaction td, table.transaction th 
+        {
+            border: 1px solid black;
+            padding: 3px 2px;
+            width: 200px;
+        }
 
-            table.transaction tbody td {
-                font-size: 13px;
-            }
+        table.transaction thead
+        {
+            background: black;
+            background: -moz-linear-gradient(top, silver 0%, );
+            background: -webkit-linear-gradient(top, silver 0%);
+            background: linear-gradient(to bottom, silver 0%);
+            border-bottom: 2px solid black;
+        }
 
-            table.transaction tr:nth-child(even) {
-                background: #D0E4F5;
-            }
+        table.transaction thead th 
+        {
+            font-size: 16px;
+            font-weight: bold;
+            color: silver;
+            text-align: center;
+            border-left: 2px solid black;
+        }
 
-            table.transaction thead {
-                background: #1F7BB8;
-                background: -moz-linear-gradient(top, #579cca 0%, #3588bf 66%, #1F7BB8 100%);
-                background: -webkit-linear-gradient(top, #579cca 0%, #3588bf 66%, #1F7BB8 100%);
-                background: linear-gradient(to bottom, #579cca 0%, #3588bf 66%, #1F7BB8 100%);
-                border-bottom: 2px solid #444444;
-            }
+        table.transaction thead th:first-child
+        {
+            border-left: none;
+        }
 
-                table.transaction thead th {
-                    font-size: 16px;
-                    font-weight: bold;
-                    color: #FFFFFF;
-                    text-align: center;
-                    border-left: 2px solid #D0E4F5;
-                }
+        table.transaction tbody td 
+        {
+            font-size: 13px;
+            color: black;
+        }
 
-                    table.transaction thead th:first-child {
-                        border-left: none;
-                    }
+        table.transaction td
+        {
+            font-size: 14px;
+            color: silver;
+        }
 
-
-            table.transaction td {
-                font-size: 14px;
-            }
-
-
-        /*
-                total
-            */
-
-        #chartContainer {
+        #chartContainer 
+        {
             height: 300px;
             width: 100%;
+        }
+
+        input.btn-primary
+        {
+            background-color : black;
+            color : silver;
+            border-color : black;
+        }
+        input.btn-primary:hover 
+        {
+            background-color: silver;
+            color: black;
+            border-color: silver;
         }
     </style>
 </head>
@@ -120,16 +134,14 @@
 
 <div id="refresh">
     <form method="post">
-
         <input type="text" name="year" id="year" value="2019" />
         <input type="text" name="month" id="month" value="12" />
-        <input type="submit" name="sub" class="btn btn-primary" value="send" />
+        <input type="submit" name="sub" class="btn btn-primary" value="Display" />
         <input type="submit" id="RefreshPage" class="btn btn-primary" value="Refresh" name="Command" />
-
     </form>
 </div>
 
-<table class="transaction">
+<table class="transaction table-striped">
 
     <thead>
         <tr>
