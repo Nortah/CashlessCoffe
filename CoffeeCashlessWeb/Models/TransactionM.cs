@@ -13,5 +13,6 @@ namespace CoffeeCashlessWeb.Models
         public DateTime Date { get; set; }
         public int AccountFK { get; set; }
         public int ProductFK { get; set; }
+
     }
 }

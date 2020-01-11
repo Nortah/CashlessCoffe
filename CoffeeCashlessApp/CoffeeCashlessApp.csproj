@@ -75,13 +75,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DAL\dbTransaction.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="DAL\dbTransaction_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>dbTransaction.mdf</DependentUpon>
-    </Content>
     <Content Include="ScriptsSQL\dbo.Account.sql" />
     <Content Include="ScriptsSQL\dbo.Product.sql" />
     <Content Include="ScriptsSQL\dbo.Transaction.sql" />

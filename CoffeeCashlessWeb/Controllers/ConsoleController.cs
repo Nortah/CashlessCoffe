@@ -13,20 +13,19 @@ namespace CoffeeCashlessWeb.Controllers
 {
     public class ConsoleController : Controller
     {
-      
+
         public ActionResult Index()
         {
-        
-
-            ProductM pvm = new ProductM
+            
+            TransactionVM pvm = new TransactionVM
             {
-                Names = ProductManager.GetAllProductName()
+                Names = ProductManager.GetAllNamesProduct()
             };
             return View(pvm);
         }
 
         [HttpPost]
-        public ActionResult Index(ProductM pvm = null)
+        public ActionResult Index(TransactionVM pvm = null)
         {
             if (ModelState.IsValid)
             {
@@ -36,20 +35,22 @@ namespace CoffeeCashlessWeb.Controllers
                 
                 Transaction transaction = new Transaction
                 {
+                    //Id = 10,
                     Date = DateTime.Now,
-                    AccountFK = pvm.Id,
+                    AccountFK = pvm.IdAccount,
                     ProductFK = ProductManager.GetIdByProductName(pvm.Name)
                 };
-
+                
                 TransactionManager.AddTransaction(transaction);
 
-                ProductM pvm1 = new ProductM
-                {
-                    Names = ProductManager.GetAllProductName()
-                };
 
-                return View(pvm1);
             }
+            TransactionVM pvm1 = new TransactionVM
+            {
+                Names = ProductManager.GetAllNamesProduct()
+            };
+
+            return View(pvm1);
         }
 
     }

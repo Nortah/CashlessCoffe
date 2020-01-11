@@ -36,9 +36,9 @@ namespace BLL
                 Console.WriteLine("\n " + t);
             }
         }
-        public static double GetTotalByMonth(int month, int year)
+        public static decimal GetTotalByMonth(int month, int year)
         {
-            double total = 0;
+            decimal total = 0;
             List<Transaction> transactions = TransactionDB.GetTransactionsByMonth(month, year);
             foreach(Transaction t in transactions)
             {

@@ -14,25 +14,19 @@ namespace CoffeeCashlessWeb.ViewModels
         //Product
         public int IdProduct { get; set; }
         public string Name { get; set; }
-        public double Price { get; set; }
+        public decimal Price { get; set; }
         public DateTime Date { get; set; }
+
+        public List<string> Names { get; set; }
 
         //Transaction
         public int IdTransaction { get; set; }
 
 
-        public TransactionVM(int idAccount, int idProduct)
-        {
-            IdAccount = idAccount;
-            IdProduct = idProduct;
-        }
-
-
-        public TransactionVM(DateTime date, int idAccount, int idProduct)
-        {
-            Date = date;
-            IdAccount = idAccount;
-            IdProduct = idProduct;
-        }
+       // public TransactionVM(int idAccount, int idProduct)
+        //{
+          //  IdAccount = idAccount;
+           // IdProduct = idProduct;
+        //}
     }
 }
