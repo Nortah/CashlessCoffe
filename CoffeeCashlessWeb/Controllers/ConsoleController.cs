@@ -16,8 +16,7 @@ namespace CoffeeCashlessWeb.Controllers
       
         public ActionResult Index()
         {
-            return View();
-        }
+        
 
             ProductM pvm = new ProductM
             {
