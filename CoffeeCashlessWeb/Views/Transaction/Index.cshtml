@@ -1,6 +1,8 @@
 ﻿@model IEnumerable<CoffeeCashlessWeb.ViewModels.TransactionSimpleViewModel>
 
 <head>
+
+
     <script>
         $(document).ready(function () {
             $('#RefreshPage').click(function () {
@@ -10,8 +12,71 @@
     </script>
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
+    @{ List<decimal> AmountYear = new List<decimal>(); }
+    @for (int i = 0; i < 12; i++)
+    {
+        AmountYear.Add(0);
 
-    @{ decimal total = 0; Boolean b = true;}
+    }
+    @{ decimal total = 0;}
+    @foreach (var item in Model)
+    {
+
+        total += item.Price;
+
+
+        if (item.TotalYear != null)
+        {
+            AmountYear = item.TotalYear;
+        }
+
+    }
+
+
+
+    <script type="text/javascript">
+
+
+
+        window.onload = function () {
+
+
+
+                var chart = new CanvasJS.Chart("chartContainer", {
+                    title: {
+                        text: "Total Amount"
+                    },
+                    data: [
+                        {
+
+                            type: "column",
+                            dataPoints: [
+
+				                { label: "Janvier", y: @AmountYear[0] },
+                                { label: "Février", y:  @AmountYear[1]  },
+                                { label: "Mars", y: @AmountYear[2]  },
+                                { label: "Avril", y:  @AmountYear[3]  },
+                                { label: "Mail", y:  @AmountYear[4]  },
+                                { label: "Juin", y: @AmountYear[5]  },
+                                { label: "Juillet", y:  @AmountYear[6]  },
+                                { label: "Août", y:  @AmountYear[7]  },
+                                { label: "Septembre", y:  @AmountYear[8]  },
+                                { label: "Octobre", y:  @AmountYear[9]  },
+                                { label: "Novembre", y:  @AmountYear[10]  },
+                                { label: "Décembre", y:  @AmountYear[11]  }
+                            ]
+                        }
+                    ]
+                });
+
+                chart.render();
+
+
+        }
+    </script>
+
+
+    @{ Boolean b = true;}
     @try
     {
         foreach (var item in Model)
@@ -33,27 +98,8 @@
 
 
 
-    <script type="text/javascript">
 
-            window.onload = function () {
-                var chart = new CanvasJS.Chart("chartContainer", {
-                    title: {
-                        text: "Total Amount"
-                    },
-                    data: [
-                        {
 
-                            type: "column",
-                            dataPoints: [
-                                { label: "Total in CHF", y: @total },
-
-                            ]
-                        }
-                    ]
-                });
-                chart.render();
-            }
-    </script>
     <style>
         #refresh {
             margin-top: 20px;

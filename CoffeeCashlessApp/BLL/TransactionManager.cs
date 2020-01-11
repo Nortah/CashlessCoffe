@@ -48,5 +48,29 @@ namespace BLL
             }
             return total;
         }
+
+        public static List<decimal> GetTotalYear(int year)
+        {
+
+            List<decimal> totalByMonthAllYear = new List<decimal>();
+            decimal total = 0;
+            for (int i = 1; i <= 12; i++)
+            {
+                List<Transaction> transactions = TransactionDB.GetTransactionsByMonth(i, year);
+                if (transactions != null)
+                {
+                    total = 0;
+                    foreach (Transaction t in transactions)
+                    {
+                        Product product = ProductManager.GetProductById(t.ProductFK);
+                        total += product.Price;
+                        Console.WriteLine("\n log Nestor: " + product.Price + " " + t.Id + " " + product.Id);
+                    }
+                    totalByMonthAllYear.Add(total);
+                }
+                else totalByMonthAllYear.Add(0);
+            }
+            return totalByMonthAllYear;
+        }
     }
 }

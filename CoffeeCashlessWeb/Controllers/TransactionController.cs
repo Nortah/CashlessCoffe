@@ -41,22 +41,52 @@ namespace CoffeeCashlessWeb.Controllers
   
         }
 
+       
 
-        // GET: Transaction/Details/2019
+        // POST: Transaction/Details/2019
         [HttpPost]
-        public ActionResult Index(int month, int year)
-        { 
+        public ActionResult Index(int month =12, int year=2020)
+        {
+            try
+            {
+                month = month + 1;
+                month = month - 1;
+
+                year = year + 1;
+                year = year - 1;
+            }
+            catch(Exception e)
+            {
+                month = 01;
+                year = 2020;
+            }
+
+            List<decimal> transactionsYear = BLL.TransactionManager.GetTotalYear(year);
+
+
             List<Transaction> transactions = BLL.TransactionManager.GetTransactionsByMonth(month, year);
-            List <TransactionSimpleViewModel> t = ConvertList(transactions);
+
+            List<TransactionSimpleViewModel> t = ConvertList(transactions);
+
             if (t != null)
+            {
+                foreach (var item in t)
+                {
+                    item.TotalYear = transactionsYear;
+                }
+
                 return View(t);
+            }
             else
             {
                 List<TransactionSimpleViewModel> t2 = new List<TransactionSimpleViewModel>();
-                t2.Add(new TransactionSimpleViewModel(new DateTime(1999,01,01), 1, 1, 1, 1));
+                t2.Add(new TransactionSimpleViewModel(new DateTime(1999, 01, 01), 1, 1, 1, 1, transactionsYear));
+
+
+
                 return View(t2);
             }
-                
+            
         }
 
 

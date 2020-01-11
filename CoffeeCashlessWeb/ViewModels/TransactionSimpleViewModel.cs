@@ -23,6 +23,8 @@ namespace CoffeeCashlessWeb.ViewModels
 
         public decimal TotalPrice { get; set; }
 
+        public List<decimal> TotalYear { get; set; }
+
         public TransactionSimpleViewModel(DateTime date, int id, int idAccount, int idProduct, decimal price)
         {
             Id = id;
@@ -31,6 +33,17 @@ namespace CoffeeCashlessWeb.ViewModels
             IdProduct = idProduct;
             Price = price;
             TotalPrice += price;
+
+        }
+        public TransactionSimpleViewModel(DateTime date, int id, int idAccount, int idProduct, decimal price, List<decimal> totalYear)
+        {
+            Id = id;
+            Date = date;
+            IdAccount = idAccount;
+            IdProduct = idProduct;
+            Price = price;
+            TotalPrice += price;
+            TotalYear = totalYear;
         }
     }
 }
