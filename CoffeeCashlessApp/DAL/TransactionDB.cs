@@ -156,8 +156,8 @@ namespace DAL
                 {
                     using (SqlConnection cn = new SqlConnection(connectionString))
                     {
-                        string query = "Insert into DeviceTransaction (Id, Date, AccountFK, ProductFK ) " +
-                            "Values(@Id, @Date, @IdAccount, @IdProduct)";
+                        string query = "Insert into DeviceTransaction (Date, AccountFK, ProductFK ) " +
+                            "Values(@Date, @IdAccount, @IdProduct)";
                         SqlCommand cmd = new SqlCommand(query, cn);
                         cmd.Parameters.AddWithValue("@Id", transaction.Id);
                         cmd.Parameters.AddWithValue("@Date", transaction.Date);

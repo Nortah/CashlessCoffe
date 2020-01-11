@@ -11,10 +11,24 @@
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
 
-    @{ decimal total = 0;}
-    @foreach (var item in Model)
+    @{ decimal total = 0; Boolean b = true;}
+    @try
     {
-        total += item.Price;
+        foreach (var item in Model)
+        {
+            total += item.Price;
+
+            if (item.Date < new DateTime(2010, 01, 01))
+            {
+                b = false;
+            }
+        }
+
+
+    }
+    catch (Exception e)
+    {
+
     }
 
 
@@ -41,19 +55,17 @@
             }
     </script>
     <style>
-        #refresh
-        {
+        #refresh {
             margin-top: 20px;
             display: block;
             width: 80%;
             margin-left: 15%;
             margin-right: 15%;
-            text-align : center;
+            text-align: center;
         }
 
         /*table*/
-        table.transaction
-        {
+        table.transaction {
             text-align: center;
             table-layout: fixed;
             display: block;
@@ -65,120 +77,126 @@
             overflow-y: scroll;
             border-collapse: collapse;
             background: none;
-            margin-bottom : 50px;
+            margin-bottom: 50px;
         }
 
-        table.transaction td, table.transaction th 
-        {
-            border: 1px solid black;
-            padding: 3px 2px;
-            width: 200px;
-        }
+            table.transaction td, table.transaction th {
+                border: 1px solid black;
+                padding: 3px 2px;
+                width: 200px;
+            }
 
-        table.transaction thead
-        {
-            background: black;
-            background: -moz-linear-gradient(top, silver 0%, );
-            background: -webkit-linear-gradient(top, silver 0%);
-            background: linear-gradient(to bottom, silver 0%);
-            border-bottom: 2px solid black;
-        }
+            table.transaction thead {
+                background: black;
+                background: -moz-linear-gradient(top, silver 0%, );
+                background: -webkit-linear-gradient(top, silver 0%);
+                background: linear-gradient(to bottom, silver 0%);
+                border-bottom: 2px solid black;
+            }
 
-        table.transaction thead th 
-        {
-            font-size: 16px;
-            font-weight: bold;
-            color: silver;
-            text-align: center;
-            border-left: 2px solid black;
-        }
+                table.transaction thead th {
+                    font-size: 16px;
+                    font-weight: bold;
+                    color: silver;
+                    text-align: center;
+                    border-left: 2px solid black;
+                }
 
-        table.transaction thead th:first-child
-        {
-            border-left: none;
-        }
+                    table.transaction thead th:first-child {
+                        border-left: none;
+                    }
 
-        table.transaction tbody td 
-        {
-            font-size: 13px;
-            color: black;
-        }
+            table.transaction tbody td {
+                font-size: 13px;
+                color: black;
+            }
 
-        table.transaction td
-        {
-            font-size: 14px;
-            color: silver;
-        }
+            table.transaction td {
+                font-size: 14px;
+                color: silver;
+            }
 
-        #chartContainer 
-        {
+        #chartContainer {
             height: 300px;
             width: 100%;
         }
 
-        input.btn-primary
-        {
-            background-color : black;
-            color : silver;
-            border-color : black;
+        input.btn-primary {
+            background-color: black;
+            color: silver;
+            border-color: black;
         }
-        input.btn-primary:hover 
-        {
-            background-color: silver;
-            color: black;
-            border-color: silver;
-        }
+
+            input.btn-primary:hover {
+                background-color: silver;
+                color: black;
+                border-color: silver;
+            }
     </style>
 </head>
 
 
 <div id="refresh">
     <form method="post">
-        <input type="text" name="year" id="year" value="2019" />
-        <input type="text" name="month" id="month" value="12" />
+        <input type="text" name="year" id="year" placeholder="2020" />
+        <input type="text" name="month" id="month" placeholder="01" />
         <input type="submit" name="sub" class="btn btn-primary" value="Display" />
         <input type="submit" id="RefreshPage" class="btn btn-primary" value="Refresh" name="Command" />
     </form>
 </div>
 
-<table class="transaction table-striped">
+@try
+{
+    if (b)
+    {
+        <table class="transaction table-striped">
 
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.IdAccount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdProduct)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Date)
-            </th>
-            <th>
-                Détails
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdAccount)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdProduct)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Date)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
-            </tr>
-        }
-    </tbody>
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IdAccount)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IdProduct)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Date)
+                    </th>
+                    <th>
+                        Détails
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IdAccount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IdProduct)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </td>
+                    </tr>
+                }
+            </tbody>
 
-</table>
+        </table>
 
-<div id="chartContainer"></div>
+        <div id="chartContainer"></div>
+    }
+    else
+    {
+        <h2>No transaction found</h2>
+    }
+}
+catch (Exception e)
+{
+    <h2>No transaction found</h2>
+}
