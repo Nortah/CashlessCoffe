@@ -7,7 +7,7 @@ using BLL;
 using DTO;
 using CoffeeCashlessWeb.ViewModels;
 using CoffeeCashlessWeb.Models;
-
+using CoffeeCashlessApp;
 
 namespace CoffeeCashlessWeb.Controllers
 {
@@ -16,7 +16,7 @@ namespace CoffeeCashlessWeb.Controllers
 
         public ActionResult Index()
         {
-            
+
             TransactionVM pvm = new TransactionVM
             {
                 Names = ProductManager.GetAllNamesProduct()
@@ -29,19 +29,33 @@ namespace CoffeeCashlessWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-       
+
                 Session["pvm"] = pvm;
 
-                
                 Transaction transaction = new Transaction
                 {
-                    //Id = 10,
                     Date = DateTime.Now,
                     AccountFK = pvm.IdAccount,
-                    ProductFK = ProductManager.GetIdByProductName(pvm.Name)
+                    ProductFK = ProductManager.GetIdByProductName(pvm.Name),
+
                 };
-                
-                TransactionManager.AddTransaction(transaction);
+
+                decimal price = ProductManager.GetPriceById(transaction.ProductFK);
+
+                if (price <= AccountManager.GetAccountAmount(pvm.IdAccount))
+                {
+
+
+                    TransactionManager.AddTransaction(transaction);
+                    AccountManager.decrementAccount(transaction.AccountFK, price);
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Solde insuffisant");
+                    return View();
+                }
+
+
 
 
             }
