@@ -1,6 +1,7 @@
 ﻿using DTO;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -10,9 +11,9 @@ namespace DAL
 {
     public class AccountDB
     {
-        public static List<Account> GetAccountsByMonth(int Id) //will sort only the month and year since the day is generated automatically in BLL
+        public static Account GetAccountById(int Id)
         {
-            List<Account> results = null;
+            Account result = null;
 
 
             string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["CashlessCoffee_DB"].ConnectionString;
@@ -29,18 +30,14 @@ namespace DAL
 
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {
-                        while (dr.Read())
+                        if (dr.Read())
                         {
-                            if (results == null)
-                                results = new List<Account>();
+                            if (result == null)
+                                result = new Account();
 
-                            Account account = new Account();
+                            result.Id = (int)dr["Id"];
 
-                            account.Id = (int)dr["Id"];
-
-                            account.TotalAmount = (decimal)dr["TotalAmount"];
-
-                            results.Add(account);
+                            result.TotalAmount = (decimal)dr["TotalAmount"];
 
                         }
                     }
@@ -50,7 +47,36 @@ namespace DAL
             {
                 throw e;
             }
-            return results;
+            return result;
+        }
+        public static int UpdateAccountAmount(Account account)
+        {
+            {
+                int result = 0;
+
+                string connectionString = ConfigurationManager.ConnectionStrings["CashlessCoffee_DB"].ConnectionString;
+
+                try
+                {
+                    using (SqlConnection cn = new SqlConnection(connectionString))
+                    {
+                        string query = "Update Account  " +
+                            "Set TotalAmount = @Amount WHERE Id = @Id";
+                        SqlCommand cmd = new SqlCommand(query, cn);
+                        cmd.Parameters.AddWithValue("@Id", account.Id);
+                        cmd.Parameters.AddWithValue("@Amount", account.TotalAmount);
+                        cn.Open();
+
+                        result = cmd.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+                //return the number of affected rows 
+                return result;
+            }
         }
     }
 }
